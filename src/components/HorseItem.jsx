@@ -11,8 +11,6 @@ export function HorseItem({ horse }) {
   }
 
   return (
-    <>
-      <ListItem button key={horse.name} onClick={handleClick}>{horse.name}</ListItem>
-    </>
+    <ListItem button key={horse.name} onClick={handleClick}>{horse.name}</ListItem>
   )
 }
