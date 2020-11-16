@@ -51,7 +51,6 @@ test('form is editable and submittable', () => {
   userEvent.type(nameTextfield, 'er');
 
   expect(nameTextfield).toHaveValue('Thunderdasher');
-  expect(favouriteFood).toHaveValue('Hot Chips');
 
   const submitButton = screen.getByText('Update horse');
 
@@ -64,4 +63,36 @@ test('form is editable and submittable', () => {
     name: 'Thunderdasher'
   };
   expect(updateHorse).toBeCalledWith(newHorse);
+});
+
+test('form is not submittable when name is empty', () => {
+  const activeHorse = {
+    id: '4c486040-a10c-4bb2-a56e-055d1eb29397',
+    name: 'Thunderdash',
+    profile: {
+      favouriteFood: 'Hot Chips',
+      physical: {
+        height: 200,
+        weight: 450
+      }
+    }
+  };
+
+  const updateHorse = jest.fn();
+
+  HorseContext.useHorses.mockReturnValue({ activeHorse, updateHorse });
+
+  render(<HorseDialog />);
+  const nameTextfield = screen.getByLabelText('Name');
+
+  userEvent.clear(nameTextfield);
+
+  expect(nameTextfield).toHaveValue('');
+
+  const submitButton = screen.getByText('Update horse').parentElement;
+
+  userEvent.click(submitButton);
+
+  expect(submitButton).toBeDisabled();
+  expect(updateHorse).toBeCalledTimes(0);
 });
