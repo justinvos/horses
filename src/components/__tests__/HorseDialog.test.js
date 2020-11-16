@@ -20,9 +20,9 @@ test('renders Thunderdash and Potoo items', () => {
   HorseContext.useHorses.mockReturnValue({ activeHorse });
 
   render(<HorseDialog />);
-  const name = screen.getByText('Name: Thunderdash');
-  const favouriteFood = screen.getByText('Favourite food: Hot Chips');
+  const nameTextfield = screen.getByLabelText('Name');
+  const favouriteFood = screen.getByLabelText('Favourite food');
 
-  expect(name).toBeInTheDocument();
+  expect(nameTextfield).toBeInTheDocument();
   expect(favouriteFood).toBeInTheDocument();
 });
