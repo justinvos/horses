@@ -6,12 +6,12 @@ import { HorseItem } from './HorseItem';
 
 const MAXIMUM_HORSES = 10;
 
-export function HorseList() {
+export function HorseList(props) {
   const { horses } = useHorses();
   const limitedHorses = horses.slice(0, MAXIMUM_HORSES);
 
   return (
-    <List data-testid="horse-list">
+    <List {...props}>
       {limitedHorses.map(horse => <HorseItem key={horse.id} horse={horse} />)}
     </List>
   );

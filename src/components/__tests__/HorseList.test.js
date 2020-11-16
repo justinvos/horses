@@ -15,7 +15,7 @@ test('renders Thunderdash and Potoo items', () => {
 
   HorseContext.useHorses.mockReturnValue({ horses });
 
-  render(<HorseList />);
+  render(<HorseList data-testid="horse-list" />);
   const thunderdashItem = screen.getByText('Thunderdash');
   const potooItem = screen.getByText('Potoo');
 
@@ -66,7 +66,7 @@ test('renders limit of ten horses', () => {
 
   HorseContext.useHorses.mockReturnValue({ horses });
 
-  render(<HorseList />);
+  render(<HorseList data-testid="horse-list" />);
   const firstHorseItem = screen.getByText('Horse 1');
   const tenthHorseItem = screen.getByText('Horse 10');
   const eleventhHorseItem = screen.queryByText('Horse 11');
