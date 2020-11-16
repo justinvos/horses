@@ -1,11 +1,16 @@
 import { List, ListItem } from '@material-ui/core';
 import React from 'react';
 
-export function HorseList() {
+const MAXIMUM_HORSES = 10;
+
+export function HorseList({ horses }) {
+  const limitedHorses = horses.slice(0, MAXIMUM_HORSES);
+
   return (
-    <List>
-      <ListItem button>Thunderdash</ListItem>
-      <ListItem button>Potoo</ListItem>
+    <List data-testid="horse-list">
+      {limitedHorses.map(horse => (
+        <ListItem button key={horse.name}>{horse.name}</ListItem>
+      ))}
     </List>
   );
 }
