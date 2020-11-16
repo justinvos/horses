@@ -43,7 +43,7 @@ function Form({ horse, updateHorse }) {
       <TextField name="favouriteFood" value={formState['favouriteFood']} label="Favourite food" onChange={handleChange} />
       <TextField name="height" value={formState['height']} label="Height" onChange={handleChange} />
       <TextField name="weight" value={formState['weight']} label="Weight" onChange={handleChange} />
-      <Button type="submit" variant="contained" disabled={disabled}>Save</Button>
+      <Button type="submit" variant="contained" disabled={disabled}>Update horse</Button>
     </form>
   );
 }
