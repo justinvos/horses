@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useHorses } from './HorseContext';
 
 export function HorseDialog() {
-  const { activeHorse, setActiveHorse } = useHorses();
+  const { activeHorse, setActiveHorse, updateHorse } = useHorses();
 
   const open = Boolean(activeHorse);
 
@@ -14,12 +14,12 @@ export function HorseDialog() {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      {activeHorse ? <Form horse={activeHorse} /> : null}
+      {activeHorse ? <Form horse={activeHorse} updateHorse={updateHorse} /> : null}
     </Dialog>
   );
 }
 
-function Form({ horse }) {
+function Form({ horse, updateHorse }) {
   const [formState, setFormState] = useState(getInitialState(horse));
 
   function handleChange(event) {
@@ -32,7 +32,7 @@ function Form({ horse }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('handleSubmit');
+    updateHorse(buildHorse(horse.id, formState));
   }
 
   const disabled = formState.name === '';
@@ -54,6 +54,21 @@ function getInitialState({ name, profile }) {
     favouriteFood: profile.favouriteFood,
     height: profile.physical.height,
     weight: profile.physical.weight
+  };
+}
+
+function buildHorse(id, formState) {
+  const { name, favouriteFood, height, weight } = formState;
+  return {
+    id,
+    name,
+    profile: {
+      favouriteFood,
+      physical: {
+        height,
+        weight
+      }
+    }
   };
 }
 

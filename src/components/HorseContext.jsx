@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-import { getHorses } from '../api';
+import { getHorses, putHorse } from '../api';
 
 export function HorseProvider({ children }) {
   const [horses, setHorses] = useState([]);
@@ -11,10 +11,18 @@ export function HorseProvider({ children }) {
       .then(setHorses);
   }, []);
 
+  function updateHorse(updatedHorse) {
+    const indexOfHorse = horses.findIndex(horseItem => horseItem.id === updatedHorse.id);
+
+    setHorses(replaceAt(horses, indexOfHorse, updatedHorse));
+    putHorse(updatedHorse);
+  }
+
   const value = {
     activeHorse,
     horses,
-    setActiveHorse
+    setActiveHorse,
+    updateHorse
   };
 
   return (
@@ -28,4 +36,13 @@ const HorseContext = createContext([]);
 
 export function useHorses() {
   return useContext(HorseContext);
+}
+
+function replaceAt(array, replaceIndex, replaceItem) {
+  return array.map((item, index) => {
+    if (index === replaceIndex) {
+      return replaceItem;
+    }
+    return item;
+  })
 }
