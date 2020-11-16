@@ -4,7 +4,7 @@ import * as HorseContext from '../HorseContext';
 
 jest.mock('../HorseContext');
 
-test('renders Thunderdash and Potoo items', () => {
+test('renders Thunderdash\'s data', () => {
   const activeHorse = {
     id: '4c486040-a10c-4bb2-a56e-055d1eb29397',
     name: 'Thunderdash',
@@ -23,6 +23,6 @@ test('renders Thunderdash and Potoo items', () => {
   const nameTextfield = screen.getByLabelText('Name');
   const favouriteFood = screen.getByLabelText('Favourite food');
 
-  expect(nameTextfield).toBeInTheDocument();
-  expect(favouriteFood).toBeInTheDocument();
+  expect(nameTextfield).toHaveValue('Thunderdash');
+  expect(favouriteFood).toHaveValue('Hot Chips');
 });
