@@ -6,12 +6,14 @@ jest.mock('../HorseContext');
 
 test('renders Thunderdash and Potoo items', () => {
   const horses = [{
+    id: '1',
     name: 'Thunderdash'
   }, {
+    id: '2',
     name: 'Potoo'
   }];
 
-  HorseContext.useHorses.mockReturnValue(horses);
+  HorseContext.useHorses.mockReturnValue({ horses });
 
   render(<HorseList />);
   const thunderdashItem = screen.getByText('Thunderdash');
@@ -28,30 +30,41 @@ test('renders Thunderdash and Potoo items', () => {
 
 test('renders limit of ten horses', () => {
   const horses = [{
+    id: '1',
     name: 'Horse 1'
   }, {
+    id: '2',
     name: 'Horse 2'
   }, {
+    id: '3',
     name: 'Horse 3'
   }, {
+    id: '4',
     name: 'Horse 4'
   }, {
+    id: '5',
     name: 'Horse 5'
   }, {
+    id: '6',
     name: 'Horse 6'
   }, {
+    id: '7',
     name: 'Horse 7'
   }, {
+    id: '8',
     name: 'Horse 8'
   }, {
+    id: '9',
     name: 'Horse 9'
   }, {
+    id: '10',
     name: 'Horse 10'
   }, {
+    id: '11',
     name: 'Horse 11'
   }];
 
-  HorseContext.useHorses.mockReturnValue(horses);
+  HorseContext.useHorses.mockReturnValue({ horses });
 
   render(<HorseList />);
   const firstHorseItem = screen.getByText('Horse 1');
