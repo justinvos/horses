@@ -1,5 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { HorseList } from '../HorseList';
+import * as HorseContext from '../HorseContext';
+
+jest.mock('../HorseContext');
 
 test('renders Thunderdash and Potoo items', () => {
   const horses = [{
@@ -8,7 +11,9 @@ test('renders Thunderdash and Potoo items', () => {
     name: 'Potoo'
   }];
 
-  render(<HorseList horses={horses} />);
+  HorseContext.useHorses.mockReturnValue(horses);
+
+  render(<HorseList />);
   const thunderdashItem = screen.getByText('Thunderdash');
   const potooItem = screen.getByText('Potoo');
 
@@ -46,7 +51,9 @@ test('renders limit of ten horses', () => {
     name: 'Horse 11'
   }];
 
-  render(<HorseList horses={horses} />);
+  HorseContext.useHorses.mockReturnValue(horses);
+
+  render(<HorseList />);
   const firstHorseItem = screen.getByText('Horse 1');
   const tenthHorseItem = screen.getByText('Horse 10');
   const eleventhHorseItem = screen.queryByText('Horse 11');

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { HorseProvider } from '../HorseProvider';
+import { HorseProvider } from '../HorseContext';
 import * as api from '../../api';
+import { HorseList } from '../HorseList';
 
 jest.mock('../../api');
 
@@ -15,7 +16,7 @@ test('renders Thunderdash and Potoo items', async () => {
 
   api.getHorses.mockResolvedValue(horses)
 
-  render(<HorseProvider>{horses => horses.map(horse => <div key={horse.id}>{horse.name}</div>)}</HorseProvider>);
+  render(<HorseProvider><HorseList /></HorseProvider>);
 
   const thunderdashItem = await screen.findByText('Thunderdash');
   const potooItem = await screen.findByText('Potoo');
