@@ -1,16 +1,15 @@
+import React from 'react';
+
 import './App.css';
 import { HorseList } from './components/HorseList';
+import { HorseProvider } from './components/HorseProvider';
 
 function App() {
   return (
-    <HorseList horses={horses} />
+    <HorseProvider>{horses => (
+      <HorseList horses={horses} />
+    )}</HorseProvider>
   );
 }
-
-const horses = [{
-  name: 'Thunderdash'
-}, {
-  name: 'Potoo'
-}];
 
 export default App;
